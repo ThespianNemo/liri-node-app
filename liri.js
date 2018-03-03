@@ -8,7 +8,7 @@ var fs = require("fs");
 var request = require("request");
 var nodeArgs = process.argv;
 
-var doThisPhrase;
+var doThisPhrase = ' ';
 
 var movieName = " ";
 
@@ -61,13 +61,37 @@ function movieThis() {
 
       //Parse the returning info
       console.log("Movie title: " + JSON.parse(body).Title);
+      fs.appendFile('log.txt', JSON.parse(body).Title + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Release Year: " + JSON.parse(body).Year);
+      fs.appendFile('log.txt', JSON.parse(body).Year + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+      fs.appendFile('log.txt', JSON.parse(body).imdbRating + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+      fs.appendFile('log.txt', JSON.parse(body).Ratings[1].Value + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Country: " + JSON.parse(body).Country);
+      fs.appendFile('log.txt', JSON.parse(body).Country + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Language: " + JSON.parse(body).Language);
+      fs.appendFile('log.txt', JSON.parse(body).Language + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Plot: " + JSON.parse(body).Plot);
+      fs.appendFile('log.txt', JSON.parse(body).Plot + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Actors: " + JSON.parse(body).Actors);
+      fs.appendFile('log.txt', JSON.parse(body).Actors + "\n", (err) => {
+        if (err) throw err;
+      })
     } 
   });
 
@@ -82,7 +106,13 @@ function myTweets() {
     if (!error) {
       for (var i = 0; i < 20; i++) {
       console.log("Tweet #" + i + " " + tweets[i].text);
+      fs.appendFile('log.txt', "Tweet #" + i + " " + tweets[i].text + "\n", (err) => {
+        if (err) throw err;
+      })
       console.log("Date tweeted " + i + " " + tweets[i].created_at);
+      fs.appendFile('log.txt', "Date tweeted " + i + " " + tweets[i].created_at + "\n", (err) => {
+        if (err) throw err;
+      })
       } 
     } 
   })
@@ -105,17 +135,28 @@ function spotifyThisSong() {
   if (songTitle === " ") {
     songTitle = "The Sign ace of base";
   }
-  console.log(songTitle);
+
   spotify.search({ type: 'track', query: songTitle }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
 //Print the song info  
-  console.log("Artist: " + data.tracks.items[0].artists[0].name); 
+  console.log("Artist: " + data.tracks.items[0].artists[0].name);
+  fs.appendFile('log.txt', data.tracks.items[0].artists[0].name + "\n", (err) => {
+    if (err) throw err;
+  })
   console.log("Song title: " + data.tracks.items[0].name);
+  fs.appendFile('log.txt', data.tracks.items[0].name + "\n", (err) => {
+    if (err) throw err;
+  })
   console.log("Song snippet: " + data.tracks.items[0].preview_url);
+  fs.appendFile('log.txt', data.tracks.items[0].preview_url + "\n", (err) => {
+    if (err) throw err;
+  })
   console.log("From the album: " + data.tracks.items[0].album.name);
-  
+  fs.appendFile('log.txt', data.tracks.items[0].album.name + "\n", (err) => {
+    if (err) throw err;
+  })
   });
 }
 //------------------------------------------------------------------------------------------------------------------
